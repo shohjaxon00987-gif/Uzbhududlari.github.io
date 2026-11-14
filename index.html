@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>O'zbekiston hududlari</title>
+<style>
+:root{
+  --lapis:#12307a; --lapis-dark:#0b1f52; --turq:#1fa6a0; --saffron:#f2b431;
+  --pomeg:#b3283d; --bg:#f2f5fa; --ink:#14203a; --muted:#56627d; --card:#ffffff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Georgia,"Times New Roman",serif;background:var(--bg);color:var(--ink);line-height:1.65}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--saffron);outline-offset:3px}
+
+/* Hero */
+.hero{
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M40 6l8 22 22 8-22 8-8 22-8-22-22-8 22-8z' fill='none' stroke='%23ffffff' stroke-opacity='.09' stroke-width='1.5'/%3E%3C/svg%3E"),
+    linear-gradient(160deg,var(--lapis-dark),var(--lapis) 70%);
+  color:#fff;padding:64px 22px 72px;text-align:center;position:relative;
+}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:8px;
+  background:linear-gradient(90deg,var(--turq) 0 33%,var(--saffron) 33% 66%,var(--pomeg) 66%)}
+.hero h1{font-size:clamp(2.2rem,8vw,4.2rem);line-height:1.1;font-weight:700;letter-spacing:-.5px;max-width:14ch;margin:0 auto 18px}
+.hero p{max-width:46ch;margin:0 auto;font-size:1.1rem;color:#d7e0f5}
+.stats{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin-top:34px}
+.stats div{font-family:system-ui,sans-serif}
+.stats b{display:block;font-size:1.9rem;color:var(--saffron)}
+.stats span{font-size:.85rem;color:#c3cfee}
+
+/* Toolbar */
+.bar{position:sticky;top:0;z-index:5;background:rgba(242,245,250,.94);backdrop-filter:blur(6px);
+  padding:14px 18px;border-bottom:1px solid #d9e0ee}
+.bar-in{max-width:1100px;margin:auto;display:flex;gap:10px;flex-wrap:wrap;font-family:system-ui,sans-serif}
+#q{flex:1 1 220px;padding:12px 16px;border:2px solid #c5cfe4;border-radius:999px;font-size:1rem;background:#fff;color:var(--ink)}
+#q:focus{border-color:var(--lapis);outline:none}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:2px solid #c5cfe4;background:#fff;border-radius:999px;padding:10px 16px;font-size:.92rem;cursor:pointer;color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--lapis);border-color:var(--lapis);color:#fff}
+
+/* Content */
+main{max-width:1100px;margin:auto;padding:34px 18px 60px}
+.count{font-family:system-ui,sans-serif;color:var(--muted);margin-bottom:20px;font-size:.95rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:22px}
+.card{background:var(--card);border-radius:14px;overflow:hidden;border:1px solid #dde4f1;
+  display:flex;flex-direction:column;box-shadow:0 2px 0 #dde4f1}
+.card .top{padding:20px 20px 16px;color:#fff;background:var(--c)}
+.card h2{font-size:1.45rem;line-height:1.2}
+.card .center{font-family:system-ui,sans-serif;font-size:.9rem;opacity:.92;margin-top:4px}
+.card .body{padding:18px 20px 22px;flex:1;display:flex;flex-direction:column;gap:12px}
+.card p{color:var(--muted);font-size:1rem}
+.card ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;font-family:system-ui,sans-serif}
+.card li{font-size:.82rem;padding:5px 11px;border-radius:999px;background:#eaf0fb;color:var(--lapis-dark)}
+.empty{display:none;text-align:center;padding:50px 10px;color:var(--muted);font-family:system-ui,sans-serif}
+
+footer{background:var(--lapis-dark);color:#b8c5e6;text-align:center;padding:30px 18px;font-family:system-ui,sans-serif;font-size:.92rem}
+
+@media (prefers-reduced-motion:no-preference){
+  .hero h1{animation:rise .8s ease both}
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>O'zbekiston hududlari</h1>
+  <p>Buyuk Ipak yo'li ustidagi yurtning 14 ta hududi: tarixi, hunarmandchiligi va ko'rishga arziydigan joylari.</p>
+  <div class="stats">
+    <div><b>12</b><span>viloyat</span></div>
+    <div><b>1</b><span>respublika</span></div>
+    <div><b>1</b><span>poytaxt shahar</span></div>
+  </div>
+</header>
+
+<div class="bar">
+  <div class="bar-in">
+    <input id="q" type="search" placeholder="Hudud yoki joy nomini qidiring..." aria-label="Qidirish">
+    <div class="chips" id="chips">
+      <button class="chip" data-f="all" aria-pressed="true">Hammasi</button>
+      <button class="chip" data-f="tarix" aria-pressed="false">Tarixiy shaharlar</button>
+      <button class="chip" data-f="tabiat" aria-pressed="false">Tabiat</button>
+      <button class="chip" data-f="hunar" aria-pressed="false">Hunarmandchilik</button>
+    </div>
+  </div>
+</div>
+
+<main>
+  <p class="count" id="count"></p>
+  <section class="grid" id="grid"></section>
+  <p class="empty" id="empty">Hech narsa topilmadi. Boshqa so'z bilan qidirib ko'ring.</p>
+</main>
+
+<footer>O'zbekiston hududlari haqida ma'lumot sayti</footer>
+
+<script>
+const regions = [
+  {n:"Toshkent shahri", c:"Poytaxt", col:"#12307a", t:["tarix"],
+   d:"Mamlakatning eng katta shahri va poytaxti. Eski shahar, Xast-Imom majmuasi va mashhur metro bekatlari bilan tanilgan.",
+   p:["Xast-Imom","Chorsu bozori","Metro"]},
+  {n:"Toshkent viloyati", c:"Markaz: Nurafshon", col:"#1b7f79", t:["tabiat"],
+   d:"Chotqol tog'lari, Chorvoq suv ombori va Bo'stonliq tog' yon bag'irlari dam olish uchun sevimli joy.",
+   p:["Chorvoq","Chotqol","Ugom-Chotqol"]},
+  {n:"Samarqand viloyati", c:"Markaz: Samarqand", col:"#b3283d", t:["tarix","hunar"],
+   d:"Dunyoning eng qadimiy shaharlaridan biri. Amir Temur va temuriylar davri me'morchiligi, ko'k gumbazlar shu yerda.",
+   p:["Registon","Go'ri Amir","Shohi Zinda"]},
+  {n:"Buxoro viloyati", c:"Markaz: Buxoro", col:"#9a6a0a", t:["tarix","hunar"],
+   d:"Ming yillik tarixiy shahar. Zarduzlik, kulolchilik va gilam to'qish an'analari bugun ham yashaydi.",
+   p:["Ark qal'asi","Poyi Kalon","Lab-i Hovuz"]},
+  {n:"Xorazm viloyati", c:"Markaz: Urganch", col:"#12307a", t:["tarix"],
+   d:"Xiva shahri butunlay muzey-shahar. Ichan-Qal'a devorlari ichida minoralar va madrasalar saqlangan.",
+   p:["Ichan-Qal'a","Kalta Minor","Juma masjidi"]},
+  {n:"Qoraqalpog'iston Respublikasi", c:"Markaz: Nukus", col:"#a14a10", t:["tabiat","tarix"],
+   d:"Mamlakatning eng katta hududi. Orol dengizi, qadimiy qal'alar va Savitskiy nomidagi san'at muzeyi bor.",
+   p:["Orol bo'yi","Mizdahkan","Savitskiy muzeyi"]},
+  {n:"Farg'ona viloyati", c:"Markaz: Farg'ona", col:"#1b7f79", t:["hunar"],
+   d:"Farg'ona vodiysining yuragi. Marg'ilon atlas va adras to'qish, kulolchilik bilan mashhur.",
+   p:["Marg'ilon","Qo'qon","Rishton kulolchiligi"]},
+  {n:"Andijon viloyati", c:"Markaz: Andijon", col:"#b3283d", t:["tarix","hunar"],
+   d:"Zahiriddin Muhammad Bobur tug'ilgan zamin. Vodiyning gavjum savdo va hunarmandchilik markazlaridan biri.",
+   p:["Bobur yodgorligi","Asaka","Jome masjidi"]},
+  {n:"Namangan viloyati", c:"Markaz: Namangan", col:"#12307a", t:["hunar"],
+   d:"Chust pichoqlari va Chust do'ppisi bilan dong chiqargan. Gullar va bog'lar shahri sifatida ham tanilgan.",
+   p:["Chust","Pop","Mullo Qirgiz madrasasi"]},
+  {n:"Qashqadaryo viloyati", c:"Markaz: Qarshi", col:"#9a6a0a", t:["tarix","tabiat"],
+   d:"Shahrisabz Amir Temur tug'ilgan joy. Hisor tizmasidagi Tangi Xushdor va Kitob qo'riqxonasi ham shu yerda.",
+   p:["Shahrisabz","Oqsaroy","Kitob"]},
+  {n:"Surxondaryo viloyati", c:"Markaz: Termiz", col:"#a14a10", t:["tarix","tabiat"],
+   d:"Mamlakatning eng janubiy hududi. Termiz buddaviy yodgorliklar, Boysun tog'lari esa noyob madaniyati bilan mashhur.",
+   p:["Termiz","Boysun","Sherobod"]},
+  {n:"Navoiy viloyati", c:"Markaz: Navoiy", col:"#1b7f79", t:["tabiat","tarix"],
+   d:"Sarmishsoy darasidagi minglab qoya rasmlari va cho'l bag'rida joylashgan Nurota tog'lari bilan qiziqarli.",
+   p:["Sarmishsoy","Nurota","Zarafshon"]},
+  {n:"Jizzax viloyati", c:"Markaz: Jizzax", col:"#b3283d", t:["tabiat"],
+   d:"Zomin tog'lari va Forish tumani tabiatga sayohat qilish uchun qulay. Mamlakatning mashhur dam olish hududlaridan.",
+   p:["Zomin","Forish","Zomin milliy bog'i"]},
+  {n:"Sirdaryo viloyati", c:"Markaz: Guliston", col:"#12307a", t:["tabiat"],
+   d:"Sirdaryo bo'yidagi tekislik va paxta dalalari hududi. Mamlakatning eng kichik viloyatlaridan biri.",
+   p:["Guliston","Sirdaryo","Paxta dalalari"]}
+];
+
+const grid = document.getElementById("grid");
+const q = document.getElementById("q");
+const count = document.getElementById("count");
+const empty = document.getElementById("empty");
+let filter = "all";
+
+function norm(s){return s.toLowerCase().replace(/[‘’ʻʼ`]/g,"'")}
+
+function render(){
+  const text = norm(q.value.trim());
+  const list = regions.filter(r =>
+    (filter==="all" || r.t.includes(filter)) &&
+    (!text || norm(r.n+" "+r.c+" "+r.d+" "+r.p.join(" ")).includes(text))
+  );
+  grid.innerHTML = list.map(r => `
+    <article class="card">
+      <div class="top" style="--c:${r.col}">
+        <h2>${r.n}</h2>
+        <div class="center">${r.c}</div>
+      </div>
+      <div class="body">
+        <p>${r.d}</p>
+        <ul>${r.p.map(x=>`<li>${x}</li>`).join("")}</ul>
+      </div>
+    </article>`).join("");
+  count.textContent = list.length + " ta hudud ko'rsatilmoqda";
+  empty.style.display = list.length ? "none" : "block";
+}
+
+q.addEventListener("input", render);
+document.getElementById("chips").addEventListener("click", e => {
+  const b = e.target.closest(".chip"); if(!b) return;
+  filter = b.dataset.f;
+  document.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c===b));
+  render();
+});
+render();
+</script>
+</body>
+</html>
